@@ -1,4 +1,4 @@
-Deze zip file bevat alle code nodig voor het runnen van het blast_script, insert_script en de webapplicatie.
+In deze repository staat alle code nodig voor het runnen van het blast_script, insert_script en de webapplicatie.
 Het blast script bevat een main functie die aangeroepen wordt als de code gerunt wordt en opent de files txt1 en txt2,
 waar de geblaste forward en reverse sequenties in aanwezig zijn, om ze te blasten en ze met insert_script in de database
 te stoppen. Aangezien alle meegeleverde sequenties uiteraard al in de database aanwezig zijn, zullen ze niet opnieuw in de
