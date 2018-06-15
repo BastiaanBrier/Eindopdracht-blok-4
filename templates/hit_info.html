@@ -1,0 +1,39 @@
+{% extends 'index.html' %}
+<!-- On this page all information about a hit, based on its id, and its corresponding reads is displayed.
+     hyperlinks in the read information allows the user to link to corresponding hit pages.-->
+{% block page %}
+    <div class = "hitinfo">
+        <h3>Hit informatie</h3>
+        <p>{{ hit_info_list[-1][0] }}<a href="https://www.ncbi.nlm.nih.gov/protein/{{ hit_info_list[-1][1] }}">{{ hit_info_list[-1][1] }}</a></p>
+        {% for attributes in hit_info_list[:-1] %}
+            <p>{{ attributes[0] }}{{ attributes[1] }}</p>
+        {% endfor %}
+    </div>
+    <div class="hitinfo">
+        <h3>Huidige read</h3>
+        <p>Header: {{ read_list1[0][0] }}</p>
+        <p>Kwaliteitsscore: {{ read_list1[0][1] }}</p>
+            {% for attributes in read_list1 %}
+                {% if attributes[3] %}
+                    <p><a href="{{ attributes[3] }}">{{ attributes[2] }}: {{ attributes[4] }}</a></p>
+                {% endif %}
+            {% endfor %}
+    </div>
+    <div class="hitinfo">
+        <h3>Corresponderende read</h3>
+        {% if read_list2 %}
+            <p>Header: {{ read_list2[0][0] }}</p>
+            <p>Kwaliteitsscore: {{ read_list2[0][1] }}</p>
+                {% for attributes in read_list2 %}
+                    {% if attributes[3] %}
+                        <p><a href="{{ attributes[3] }}">{{ attributes[2] }}: {{ attributes[4] }}</a></p>
+                    {% else %}
+                        <p>Geen hits bij corresponderende read.</p>
+                    {% endif %}
+                {% endfor %}
+        {% else %}
+            <p>Geen corresponderende read.</p>
+        {% endif %}
+    </div>
+
+{% endblock page %}

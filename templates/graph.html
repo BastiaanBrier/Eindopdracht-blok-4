@@ -1,0 +1,39 @@
+{% extends 'home.html' %}
+ <!-- On this page the actual graph and legend for the most found species or proteins are added
+      to the homepage HTML template.-->
+{% block graph %}
+    <!-- Image -->
+    <figure class="margin-b-2">
+        <img id="imgresponsive" class="img-responsive" src = "data:image/png;base64, {{ graph['html'] }}" alt="matplotlib image">
+        <!--<figcaption class="margin-t-h">matplotlib bar chart {{ graph['title'] }}</figcaption>-->
+    </figure>
+
+    <!--{{ graph["description"] }}-->
+
+    <hr>
+{% endblock %}
+
+{% block panel %} <!-- block with the legend -->
+    <p>
+        <ol>
+        {% for value in mostcommon %}
+            <li>
+                <form method="post" action="results" class="inline">
+                    {% if id == "soorten" %}
+                        <input type="hidden" name="organism" value="{{ value }}">
+                        <input type="hidden" name="protein" value="">
+                    {% elif id == "eiwitten" %}
+                        <input type="hidden" name="organism" value="">
+                        <input type="hidden" name="protein" value="{{ value }}">
+                    {% endif %}
+                    <input type="hidden" name="comment" value="">
+                    <input type="hidden" name="read_quality" value="">
+                    <button type="submit"><!-- name="submit_param" value="submit_value" class="link-button"-->
+                    {{ value }}
+                    </button>
+                </form>
+            </li>
+        {% endfor %}
+        </ol>
+    </p>
+{% endblock panel %}

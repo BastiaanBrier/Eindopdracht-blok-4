@@ -1,0 +1,49 @@
+{% extends 'index.html' %}
+<!-- On this page the results of a database search are displayed. It also contains the same search form present on the
+     homepage, so that the database can be searched again.-->
+
+{% block page %}
+    <div class="well">
+        <h4 class="margin-t-0">Doorzoek de database</h4>
+        <form method = "POST" action="results" id="form1" name="form1">
+            <div class="input-group">
+                <label class="sr-only" for="search-form">Search the site</label>
+                <p>Organisme</p><input type="text" class="form-control" id="search-form" name = "organism">
+                <p>Eiwit</p><input type="text" class="form-control" id="search-form" name = "protein">
+                <p>Comment</p><input type="text" class="form-control" id="search-form" name = "comment">
+                <p>Read kwaliteit</p><input type="text" class="form-control" id="search-form" name = "read_quality">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type = "submit">
+                        <span class="glyphicon glyphicon-search"></span>
+                        <span class="sr-only">Search</span>
+                    </button>
+                </span>
+            </div>
+        </form>
+    </div>
+
+    <div class="floatingdiv">
+        <table style="width:100%" border="1">
+            <tr>
+                <th>Hit link</th>
+                <th>Organisme naam</th>
+                <th>Eiwit naam</th>
+                <th>Score</th>
+                <th>Percentage query cover</th>
+                <th>Percentage identity</th>
+                <th>E value</th>
+            </tr>
+            {%for attributes in result_list%}
+                {% if attributes %}
+                    <tr>
+                        <td><a href="hit/{{ attributes[0] }}">Go to hit</a></td>
+                        {% for value in attributes[1:] %}
+                            <td> {{ value }}</td>
+                        {% endfor %}
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </table>
+    </div>
+
+{% endblock page %}

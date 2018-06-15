@@ -1,0 +1,62 @@
+{% extends 'index.html' %}
+<!-- This is the homepage on which a graph containing most found species or most found proteins is displayed. It also
+      contains a search form used to search the database and link to the results page. -->
+{% block page %}
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-sm-8 col-sm-push-4">
+					<div class="page-header">
+						<h1>Champignonteelt onderzoek</h1>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-8 col-sm-push-4">
+                {% block graph %}
+                <!-- block barcharts -->
+                {% endblock graph %}
+
+				</div>
+
+				<div class="col-sm-4 col-sm-pull-8">
+					<!-- Search -->
+					<div class="well">
+						<h4 class="margin-t-0">Doorzoek de database</h4>
+						<form method = "POST" action="results" id="form1" name="form1">
+							<div class="input-group">
+								<label class="sr-only" for="search-form">Search the site</label>
+                                <p>Organisme</p><input type="text" class="form-control" id="search-form" name = "organism">
+                                <p>Eiwit</p><input type="text" class="form-control" id="search-form" name = "protein">
+                                <p>Comment</p><input type="text" class="form-control" id="search-form" name = "comment">
+                                <p>Read kwaliteit</p><input type="text" class="form-control" id="search-form" name = "read_quality">
+								<span class="input-group-btn">
+									<button class="btn btn-default" type = "submit">
+										<span class="glyphicon glyphicon-search"></span>
+										<span class="sr-only">Search</span>
+									</button>
+								</span>
+							</div>
+						</form>
+					</div>
+
+					<!-- list group -->
+					<div class="list-group margin-b-3">
+                        <a href="soorten"  class="list-group-item" >Soorten </a>
+                        <a href="eiwitten"  class="list-group-item">Eiwitten</a>
+					</div>
+
+					<!-- Panel -->
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title">Legenda</h4>
+						</div>
+						<div class="panel-body">
+                            {% block panel %}
+                            {% endblock panel %}
+						</div>
+					</div>
+
+				</div>
+			</div>
+{% endblock page %}
